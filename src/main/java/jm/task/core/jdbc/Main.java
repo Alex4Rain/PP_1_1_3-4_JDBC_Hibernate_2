@@ -18,7 +18,7 @@ public class Main {
             userService.saveUser("Niolax", "Toomberg", (byte) 28);
             userService.saveUser("Adolf", "Wolf", (byte) 54);
 
-            userService.removeUserById(2);
+            userService.removeUserById(1L);
 
             for (User user : userService.getAllUsers()) {
                 System.out.println(user);
@@ -27,6 +27,8 @@ public class Main {
             userService.cleanUsersTable();
 
             userService.dropUsersTable();
+
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

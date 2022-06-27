@@ -20,8 +20,8 @@ public class UserDaoJDBCImpl implements UserDao {
             connection.commit();
         } catch (SQLSyntaxErrorException e) {
             System.out.println("Table with this name already exist");
-            connection.rollback();
         } catch (SQLException e1) {
+            e1.printStackTrace();
             connection.rollback();
         }
     }
@@ -33,8 +33,8 @@ public class UserDaoJDBCImpl implements UserDao {
             connection.commit();
         } catch (SQLSyntaxErrorException e) {
             System.out.println("Table with this name don't exist");
-            connection.rollback();
         } catch (SQLException e1) {
+            e1.printStackTrace();
             connection.rollback();
         }
     }
@@ -46,6 +46,7 @@ public class UserDaoJDBCImpl implements UserDao {
             connection.commit();
             System.out.println("User with the name " + name + " and at the age of " + age + " years was added to DB");
         } catch (SQLException e) {
+            e.printStackTrace();
             connection.rollback();
         }
     }
@@ -55,10 +56,8 @@ public class UserDaoJDBCImpl implements UserDao {
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate(remove);
             connection.commit();
-        } catch (SQLSyntaxErrorException e) {
-            connection.rollback();
-            System.out.println("User с таким ID не существует");
-        } catch (SQLException e1) {
+        } catch (SQLException e) {
+            e.printStackTrace();
             connection.rollback();
         }
     }
@@ -74,6 +73,7 @@ public class UserDaoJDBCImpl implements UserDao {
                 usersList.add(user);
             }
         } catch (SQLException e) {
+            e.printStackTrace();
             connection.rollback();
         }
         return usersList;
@@ -85,9 +85,9 @@ public class UserDaoJDBCImpl implements UserDao {
             statement.executeUpdate(clean);
             connection.commit();
         } catch (SQLSyntaxErrorException e) {
-            connection.rollback();
-            System.out.println("Таблицы с таким именем не существует");
+            System.out.println("Table with this name don't exist");
         } catch (SQLException e1) {
+            e1.printStackTrace();
             connection.rollback();
         }
     }
