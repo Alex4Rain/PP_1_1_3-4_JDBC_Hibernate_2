@@ -18,7 +18,6 @@ public class Util {
                 connection.setAutoCommit(false);
             } catch (SQLException e) {
                 e.printStackTrace();
-                throw new RuntimeException();
             }
         }
         return connection;
